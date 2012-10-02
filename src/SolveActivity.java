@@ -1,7 +1,6 @@
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.LinkedList;
-import java.util.Set;
 import java.util.ListIterator;
 
 public class SolveActivity {
@@ -36,6 +35,7 @@ public class SolveActivity {
 	}
 	
 	public void findBestPath() {
+
 		open.add(start);		
 
 		while (open.size() > 0) {
@@ -46,13 +46,19 @@ public class SolveActivity {
 				break;
 			}
 
-			Set<State> children = current.getChildren();
-
-			for (State cur : children) {
-				if (closed.contains(current))
-					continue;
-				open.add(cur);
-			}
+			State moveUp = current.moveUp();
+			State moveDown = current.moveDown();
+			State moveRight = current.moveRight();
+			State moveLeft = current.moveLeft();
+			
+			if ( moveUp != null && !closed.contains( moveUp ) )
+				open.add( moveUp );
+			if ( moveDown != null && !closed.contains( moveDown ))
+				open.add ( moveDown );
+			if ( moveRight != null && !closed.contains( moveRight ))
+				open.add ( moveRight );
+			if ( moveLeft != null && !closed.contains( moveLeft ))
+				open.add ( moveLeft );
 			
 		}
 	}

@@ -35,11 +35,12 @@ public class SolveActivity {
 	}
 	
 	public void findBestPath() {
-
 		open.add(start);		
 
 		while (open.size() > 0) {
 			State current = open.poll();
+			closed.add(current);
+			
 			if (current.calculateH() == 0) {
 				reconstruct(current);
 				draw_reconstruct();
